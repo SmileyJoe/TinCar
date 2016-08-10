@@ -1,6 +1,13 @@
 package za.co.smileyjoedev.tincar.object;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
 /**
  * Created by cody on 2016/08/10.
@@ -45,5 +52,42 @@ public class Car {
         }
 
         return extra;
+    }
+
+    public static ArrayList<Car> fromApiResponse(JsonArray jsonArray){
+        ArrayList<Car> cars = new ArrayList<>();
+
+        for(int i = 0; i < jsonArray.size(); i++){
+            JsonElement element = jsonArray.get(i);
+
+            if(element.isJsonObject()) {
+                cars.add(fromApiResponse(element.getAsJsonObject()));
+            }
+        }
+
+        return cars;
+    }
+
+    public static Car fromApiResponse(JsonObject object){
+        Car car = new Car();
+        JsonHelper helper = new JsonHelper(object);
+
+        car.setId(helper.getLong("id"));
+        car.setTitle(helper.getString("title"));
+
+        for(Extra.Type type:Extra.Type.values()){
+            car.addExtra(type, Extra.fromApiResponse(helper.getObject(type.getApiKey())));
+        }
+
+        return car;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "mId=" + mId +
+                ", mTitle='" + mTitle + '\'' +
+                ", mExtras=" + mExtras +
+                '}';
     }
 }

@@ -2,6 +2,22 @@
     <string name="app_name">Tincar</string>
 
     <string name="extra_title_make">Make</string>
+    <string name="extra_title_model">Model</string>
+    <string name="extra_title_location">Location</string>
+    <string name="extra_title_listing_status">Listing Status</string>
+    <string name="extra_title_advertiser">Advertiser</string>
+    <string name="extra_title_user">User</string>
+    <string name="extra_title_duty">Duty</string>
+    <string name="extra_title_drive_type">Drive Type</string>
+    <string name="extra_title_drive_setup">Drive Setup</string>
+    <string name="extra_title_body_type">Body Type</string>
+    <string name="extra_title_condition">Condition</string>
+    <string name="extra_title_fuel_type">Fuel Type</string>
+    <string name="extra_title_transmission">Transmission</string>
+    <string name="extra_title_interior">Interior</string>
+    <string name="extra_title_colour">Colour</string>
+    <string name="extra_title_door_count">Door Count</string>
+    <string name="extra_title_contact_method">Contact Method</string>
 
     <string name="dialog_message_loading">Loading %1$s</string>
     <string name="text_type_cars">cars</string>
