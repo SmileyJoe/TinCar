@@ -5,8 +5,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
+import za.co.smileyjoedev.tincar.helper.DateHelper;
 import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
 /**
@@ -17,6 +19,10 @@ public class Car {
     private long mId;
     private String mTitle;
     private HashMap<Extra.Type, Extra> mExtras;
+    private Date mCreatedAt;
+    private Date mUpdatedAt;
+    private Date mEnableAt;
+    private Date mDisableAt;
 
     public void setId(long id) {
         mId = id;
@@ -32,6 +38,46 @@ public class Car {
         }
 
         mExtras.put(type, extra);
+    }
+
+    public void setCreatedAt(String apiDate){
+        mCreatedAt = getDate(apiDate);
+    }
+
+    public String getCreatedAt(){
+        return getDate(mCreatedAt);
+    }
+
+    public void setUpdatedAt(String apiDate){
+        mUpdatedAt = getDate(apiDate);
+    }
+
+    public String getUpdatedAt(){
+        return getDate(mUpdatedAt);
+    }
+
+    public void setEnableAt(String apiDate){
+        mEnableAt = getDate(apiDate);
+    }
+
+    public String getEnableAt(){
+        return getDate(mEnableAt);
+    }
+
+    public void setDisableAt(String apiDate){
+        mDisableAt = getDate(apiDate);
+    }
+
+    public String getDisableAt(){
+        return getDate(mDisableAt);
+    }
+
+    private Date getDate(String apiDate){
+        return DateHelper.format(apiDate, DateHelper.FORMAT_API);
+    }
+
+    private String getDate(Date date){
+        return DateHelper.format(date);
     }
 
     public long getId() {
@@ -74,6 +120,10 @@ public class Car {
 
         car.setId(helper.getLong("id"));
         car.setTitle(helper.getString("title"));
+        car.setCreatedAt(helper.getString("created_at"));
+        car.setUpdatedAt(helper.getString("updated_at"));
+        car.setEnableAt(helper.getString("enable_at"));
+        car.setDisableAt(helper.getString("disable_at"));
 
         for(Extra.Type type:Extra.Type.values()){
             car.addExtra(type, Extra.fromApiResponse(helper.getObject(type.getApiKey())));
@@ -88,6 +138,10 @@ public class Car {
                 "mId=" + mId +
                 ", mTitle='" + mTitle + '\'' +
                 ", mExtras=" + mExtras +
+                ", mCreatedAt=" + getCreatedAt() +
+                ", mUpdatedAt=" + getUpdatedAt() +
+                ", mEnableAt=" + getEnableAt() +
+                ", mDisableAt=" + getDisableAt() +
                 '}';
     }
 }
