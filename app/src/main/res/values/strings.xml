@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Tincar</string>
+
+    <string name="extra_title_make">Make</string>
+
+    <string name="dialog_message_loading">Loading %1$s</string>
+    <string name="text_type_cars">cars</string>
 </resources>
