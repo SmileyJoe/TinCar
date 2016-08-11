@@ -20,7 +20,6 @@ public class Extra {
         LOCATION(R.string.extra_title_location, "location"),
         LISTING_STATUS(R.string.extra_title_listing_status, "listing_status"),
         ADVERTISER(R.string.extra_title_advertiser, "advertiser"),
-        USER_ID(R.string.extra_title_user, "user_id"),
         DUTY(R.string.extra_title_duty, "duty"),
         DRIVE_TYPE(R.string.extra_title_drive_type, "drive_type"),
         DRIVE_SETUP(R.string.extra_title_drive_setup, "drive_setup"),
@@ -30,8 +29,7 @@ public class Extra {
         TRANSMISSION(R.string.extra_title_transmission, "transmission"),
         INTERIOR(R.string.extra_title_interior, "interior"),
         COLOUR(R.string.extra_title_colour, "colour"),
-        DOOR_COUNT(R.string.extra_title_door_count, "door_count"),
-        CONTACT_METHOD(R.string.extra_title_contact_method, "contact_method");
+        DOOR_COUNT(R.string.extra_title_door_count, "door_count");
 
         private String mDisplayTitle;
         private int mDisplayTitleResId;

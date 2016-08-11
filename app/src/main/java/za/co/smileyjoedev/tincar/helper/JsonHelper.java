@@ -11,6 +11,9 @@ public class JsonHelper {
 
     public static final String DEFAULT_STRING = "";
     public static final long DEFAULT_LONG = -1L;
+    public static final int DEFAULT_INT = -1;
+    public static final double DEFAULT_DOUBLE = -1.0;
+    public static final boolean DEFAULT_BOOLEAN = false;
 
     public JsonHelper(JsonObject object) {
         mObject = object;
@@ -56,6 +59,48 @@ public class JsonHelper {
         }
 
         return returnObject;
+    }
+
+    public double getDouble(String key){
+        double value = DEFAULT_DOUBLE;
+
+        if(isValid(key)){
+            try{
+                value = mObject.get(key).getAsDouble();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return value;
+    }
+
+    public boolean getBoolean(String key){
+        boolean value = DEFAULT_BOOLEAN;
+
+        if(isValid(key)){
+            try{
+                value = mObject.get(key).getAsBoolean();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return value;
+    }
+
+    public int getInt(String key){
+        int value = DEFAULT_INT;
+
+        if(isValid(key)){
+            try{
+                value = mObject.get(key).getAsInt();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return value;
     }
 
     private boolean isValid(String key){

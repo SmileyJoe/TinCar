@@ -16,6 +16,8 @@ import za.co.smileyjoedev.tincar.helper.JsonHelper;
  */
 public class Car {
 
+    private static final String BASE_URL = "https://www.cheki.co.ke/";
+
     private long mId;
     private String mTitle;
     private HashMap<Extra.Type, Extra> mExtras;
@@ -23,6 +25,18 @@ public class Car {
     private Date mUpdatedAt;
     private Date mEnableAt;
     private Date mDisableAt;
+    private String mUrl;
+    private String mDescription;
+    private String mDefaultImageUrl;
+    private Amount mAmount;
+    private boolean mIsNegotiable;
+    private String mEngineSize;
+    private int mYear;
+    private int mMileage;
+    private String mRegistration;
+    private boolean mMoneyBackGaruntee;
+    private int mViews;
+    private User mUser;
 
     public void setId(long id) {
         mId = id;
@@ -66,6 +80,102 @@ public class Car {
 
     public void setDisableAt(String apiDate){
         mDisableAt = getDate(apiDate);
+    }
+
+    public void setUrl(String url) {
+        mUrl = BASE_URL + url;
+    }
+
+    public String getUrl() {
+        return mUrl;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDefaultImageUrl(String defaultImageUrl) {
+        mDefaultImageUrl = defaultImageUrl;
+    }
+
+    public String getDefaultImageUrl() {
+        return mDefaultImageUrl;
+    }
+
+    public void setAmount(Amount amount) {
+        mAmount = amount;
+    }
+
+    public void setNegotiable(boolean negotiable) {
+        mIsNegotiable = negotiable;
+    }
+
+    public void setEngineSize(String engineSize) {
+        mEngineSize = engineSize;
+    }
+
+    public void setYear(int year) {
+        mYear = year;
+    }
+
+    public void setMileage(int mileage) {
+        mMileage = mileage;
+    }
+
+    public void setRegistration(String registration) {
+        mRegistration = registration;
+    }
+
+    public void setMoneyBackGaruntee(boolean moneyBackGaruntee) {
+        mMoneyBackGaruntee = moneyBackGaruntee;
+    }
+
+    public void setViews(int views) {
+        mViews = views;
+    }
+
+    public void setUser(User user) {
+        mUser = user;
+    }
+
+    public boolean isNegotiable() {
+        return mIsNegotiable;
+    }
+
+    public String getEngineSize() {
+        return mEngineSize;
+    }
+
+    public int getYear() {
+        return mYear;
+    }
+
+    public int getMileage() {
+        return mMileage;
+    }
+
+    public String getRegistration() {
+        return mRegistration;
+    }
+
+    public boolean isMoneyBackGaruntee() {
+        return mMoneyBackGaruntee;
+    }
+
+    public int getViews() {
+        return mViews;
+    }
+
+    public User getUser() {
+        return mUser;
+    }
+
+    public Amount getAmount() {
+        return mAmount;
     }
 
     public String getDisableAt(){
@@ -124,6 +234,18 @@ public class Car {
         car.setUpdatedAt(helper.getString("updated_at"));
         car.setEnableAt(helper.getString("enable_at"));
         car.setDisableAt(helper.getString("disable_at"));
+        car.setUrl(helper.getString("url"));
+        car.setDescription(helper.getString("description"));
+        car.setDefaultImageUrl(helper.getString("default_image"));
+        car.setAmount(Amount.fromApiResponse(helper));
+        car.setNegotiable(helper.getBoolean("is_negotiable"));
+        car.setEngineSize(helper.getString("engine_size"));
+        car.setYear(helper.getInt("year"));
+        car.setMileage(helper.getInt("mileage"));
+        car.setRegistration(helper.getString("registration"));
+        car.setMoneyBackGaruntee(helper.getBoolean("money_back_guarantee"));
+        car.setViews(helper.getInt("views"));
+        car.setUser(User.fromApiResponse(helper));
 
         for(Extra.Type type:Extra.Type.values()){
             car.addExtra(type, Extra.fromApiResponse(helper.getObject(type.getApiKey())));
@@ -138,10 +260,22 @@ public class Car {
                 "mId=" + mId +
                 ", mTitle='" + mTitle + '\'' +
                 ", mExtras=" + mExtras +
-                ", mCreatedAt=" + getCreatedAt() +
-                ", mUpdatedAt=" + getUpdatedAt() +
-                ", mEnableAt=" + getEnableAt() +
-                ", mDisableAt=" + getDisableAt() +
+                ", mCreatedAt=" + mCreatedAt +
+                ", mUpdatedAt=" + mUpdatedAt +
+                ", mEnableAt=" + mEnableAt +
+                ", mDisableAt=" + mDisableAt +
+                ", mUrl='" + mUrl + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mDefaultImageUrl='" + mDefaultImageUrl + '\'' +
+                ", mAmount=" + mAmount +
+                ", mIsNegotiable=" + mIsNegotiable +
+                ", mEngineSize='" + mEngineSize + '\'' +
+                ", mYear=" + mYear +
+                ", mMileage=" + mMileage +
+                ", mRegistration='" + mRegistration + '\'' +
+                ", mMoneyBackGaruntee=" + mMoneyBackGaruntee +
+                ", mViews=" + mViews +
+                ", mUser=" + mUser +
                 '}';
     }
 }
