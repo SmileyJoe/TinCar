@@ -38,178 +38,6 @@ public class Car {
     private int mViews;
     private User mUser;
 
-    public void setId(long id) {
-        mId = id;
-    }
-
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
-    public void addExtra(Extra.Type type, Extra extra){
-        if(mExtras == null){
-            mExtras = new HashMap<>();
-        }
-
-        mExtras.put(type, extra);
-    }
-
-    public void setCreatedAt(String apiDate){
-        mCreatedAt = getDate(apiDate);
-    }
-
-    public String getCreatedAt(){
-        return getDate(mCreatedAt);
-    }
-
-    public void setUpdatedAt(String apiDate){
-        mUpdatedAt = getDate(apiDate);
-    }
-
-    public String getUpdatedAt(){
-        return getDate(mUpdatedAt);
-    }
-
-    public void setEnableAt(String apiDate){
-        mEnableAt = getDate(apiDate);
-    }
-
-    public String getEnableAt(){
-        return getDate(mEnableAt);
-    }
-
-    public void setDisableAt(String apiDate){
-        mDisableAt = getDate(apiDate);
-    }
-
-    public void setUrl(String url) {
-        mUrl = BASE_URL + url;
-    }
-
-    public String getUrl() {
-        return mUrl;
-    }
-
-    public void setDescription(String description) {
-        mDescription = description;
-    }
-
-    public String getDescription() {
-        return mDescription;
-    }
-
-    public void setDefaultImageUrl(String defaultImageUrl) {
-        mDefaultImageUrl = defaultImageUrl;
-    }
-
-    public String getDefaultImageUrl() {
-        return mDefaultImageUrl;
-    }
-
-    public void setAmount(Amount amount) {
-        mAmount = amount;
-    }
-
-    public void setNegotiable(boolean negotiable) {
-        mIsNegotiable = negotiable;
-    }
-
-    public void setEngineSize(String engineSize) {
-        mEngineSize = engineSize;
-    }
-
-    public void setYear(int year) {
-        mYear = year;
-    }
-
-    public void setMileage(int mileage) {
-        mMileage = mileage;
-    }
-
-    public void setRegistration(String registration) {
-        mRegistration = registration;
-    }
-
-    public void setMoneyBackGaruntee(boolean moneyBackGaruntee) {
-        mMoneyBackGaruntee = moneyBackGaruntee;
-    }
-
-    public void setViews(int views) {
-        mViews = views;
-    }
-
-    public void setUser(User user) {
-        mUser = user;
-    }
-
-    public boolean isNegotiable() {
-        return mIsNegotiable;
-    }
-
-    public String getEngineSize() {
-        return mEngineSize;
-    }
-
-    public int getYear() {
-        return mYear;
-    }
-
-    public int getMileage() {
-        return mMileage;
-    }
-
-    public String getRegistration() {
-        return mRegistration;
-    }
-
-    public boolean isMoneyBackGaruntee() {
-        return mMoneyBackGaruntee;
-    }
-
-    public int getViews() {
-        return mViews;
-    }
-
-    public User getUser() {
-        return mUser;
-    }
-
-    public Amount getAmount() {
-        return mAmount;
-    }
-
-    public String getDisableAt(){
-        return getDate(mDisableAt);
-    }
-
-    private Date getDate(String apiDate){
-        return DateHelper.format(apiDate, DateHelper.FORMAT_API);
-    }
-
-    private String getDate(Date date){
-        return DateHelper.format(date);
-    }
-
-    public long getId() {
-        return mId;
-    }
-
-    public String getTitle() {
-        return mTitle;
-    }
-
-    public Extra getExtra(Extra.Type type){
-        Extra extra = null;
-
-        if(mExtras != null){
-            if(mExtras.containsKey(type)){
-                extra = mExtras.get(type);
-            }
-        }
-
-        return extra;
-    }
-
     public static ArrayList<Car> fromApiResponse(JsonArray jsonArray){
         ArrayList<Car> cars = new ArrayList<>();
 
@@ -252,6 +80,178 @@ public class Car {
         }
 
         return car;
+    }
+
+    public void addExtra(Extra.Type type, Extra extra){
+        if(mExtras == null){
+            mExtras = new HashMap<>();
+        }
+
+        mExtras.put(type, extra);
+    }
+
+    public String getCreatedAt(){
+        return getDate(mCreatedAt);
+    }
+
+    public void setCreatedAt(String apiDate){
+        mCreatedAt = getDate(apiDate);
+    }
+
+    public String getUpdatedAt(){
+        return getDate(mUpdatedAt);
+    }
+
+    public void setUpdatedAt(String apiDate){
+        mUpdatedAt = getDate(apiDate);
+    }
+
+    public String getEnableAt(){
+        return getDate(mEnableAt);
+    }
+
+    public void setEnableAt(String apiDate){
+        mEnableAt = getDate(apiDate);
+    }
+
+    public String getUrl() {
+        return mUrl;
+    }
+
+    public void setUrl(String url) {
+        mUrl = BASE_URL + url;
+    }
+
+    public String getDescription() {
+        return mDescription;
+    }
+
+    public void setDescription(String description) {
+        mDescription = description;
+    }
+
+    public String getDefaultImageUrl() {
+        return mDefaultImageUrl;
+    }
+
+    public void setDefaultImageUrl(String defaultImageUrl) {
+        mDefaultImageUrl = defaultImageUrl;
+    }
+
+    public boolean isNegotiable() {
+        return mIsNegotiable;
+    }
+
+    public void setNegotiable(boolean negotiable) {
+        mIsNegotiable = negotiable;
+    }
+
+    public String getEngineSize() {
+        return mEngineSize;
+    }
+
+    public void setEngineSize(String engineSize) {
+        mEngineSize = engineSize;
+    }
+
+    public int getYear() {
+        return mYear;
+    }
+
+    public void setYear(int year) {
+        mYear = year;
+    }
+
+    public int getMileage() {
+        return mMileage;
+    }
+
+    public void setMileage(int mileage) {
+        mMileage = mileage;
+    }
+
+    public String getRegistration() {
+        return mRegistration;
+    }
+
+    public void setRegistration(String registration) {
+        mRegistration = registration;
+    }
+
+    public boolean isMoneyBackGaruntee() {
+        return mMoneyBackGaruntee;
+    }
+
+    public void setMoneyBackGaruntee(boolean moneyBackGaruntee) {
+        mMoneyBackGaruntee = moneyBackGaruntee;
+    }
+
+    public int getViews() {
+        return mViews;
+    }
+
+    public void setViews(int views) {
+        mViews = views;
+    }
+
+    public User getUser() {
+        return mUser;
+    }
+
+    public void setUser(User user) {
+        mUser = user;
+    }
+
+    public Amount getAmount() {
+        return mAmount;
+    }
+
+    public void setAmount(Amount amount) {
+        mAmount = amount;
+    }
+
+    public String getDisableAt(){
+        return getDate(mDisableAt);
+    }
+
+    public void setDisableAt(String apiDate){
+        mDisableAt = getDate(apiDate);
+    }
+
+    private Date getDate(String apiDate){
+        return DateHelper.format(apiDate, DateHelper.FORMAT_API);
+    }
+
+    private String getDate(Date date){
+        return DateHelper.format(date);
+    }
+
+    public long getId() {
+        return mId;
+    }
+
+    public void setId(long id) {
+        mId = id;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        mTitle = title;
+    }
+
+    public Extra getExtra(Extra.Type type){
+        Extra extra = null;
+
+        if(mExtras != null){
+            if(mExtras.containsKey(type)){
+                extra = mExtras.get(type);
+            }
+        }
+
+        return extra;
     }
 
     @Override
