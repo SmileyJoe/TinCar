@@ -1,6 +1,7 @@
 package za.co.smileyjoedev.tincar.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,20 +74,22 @@ public class SwipeCardAdapter extends BaseAdapter {
 
     private static class ViewHolder{
         private TextView mTextTitle;
+        private TextView mTextAmount;
         private ImageView mImageCar;
 
         public void process(View view){
             mTextTitle = (TextView) view.findViewById(R.id.text_title);
             mImageCar = (ImageView) view.findViewById(R.id.image_car);
+            mTextAmount = (TextView) view.findViewById(R.id.text_amount);
         }
 
         public void render(Car car){
             mTextTitle.setText(car.getTitle());
+            mTextAmount.setText(car.getAmount().getFormatted());
+
             Ion.with(mImageCar)
                     .placeholder(android.R.drawable.btn_star_big_off)
                     .error(android.R.drawable.btn_star_big_on)
-//                    .animateLoad(spinAnimation)
-//                    .animateIn(fadeInAnimation)
                     .load(car.getDefaultImageUrl());
         }
     }
