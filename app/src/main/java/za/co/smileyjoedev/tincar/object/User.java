@@ -1,11 +1,15 @@
 package za.co.smileyjoedev.tincar.object;
 
+import java.io.Serializable;
+
 import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
 /**
  * Created by cody on 2016/08/11.
  */
-public class User {
+public class User implements Serializable{
+
+    private static final long serialVersionUID = 45L;
 
     private String mFirstName;
     private String mLastName;

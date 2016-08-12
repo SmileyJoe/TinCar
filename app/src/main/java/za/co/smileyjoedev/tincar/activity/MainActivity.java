@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onItemClicked(int position, Object object) {
             Car car = (Car) object;
-
+            startActivity(CarViewActivity.getIntent(getBaseContext(), car));
             Log.d("TinCar", "Clicked: " + car.getTitle());
         }
     }
@@ -89,7 +89,6 @@ public class MainActivity extends BaseActivity {
                 if(element.isJsonArray()){
                     ArrayList<Car> cars = Car.fromApiResponse(element.getAsJsonArray());
                     mSwipeCardAdapterCar.update(cars);
-                    Log.d("TinCar", cars.get(0).toString());
                 }
             }
         }

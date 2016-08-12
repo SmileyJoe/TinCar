@@ -5,13 +5,17 @@ import android.text.TextUtils;
 
 import com.google.gson.JsonObject;
 
+import java.io.Serializable;
+
 import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
 /**
  * Created by cody on 2016/08/10.
  */
-public class Extra {
+public class Extra implements Serializable{
+
+    private static final long serialVersionUID = 44L;
 
     public enum Type{
 

@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,8 +15,9 @@ import za.co.smileyjoedev.tincar.helper.JsonHelper;
 /**
  * Created by cody on 2016/08/10.
  */
-public class Car {
+public class Car implements Serializable{
 
+    private static final long serialVersionUID = 43L;
     private static final String BASE_URL = "https://www.cheki.co.ke/";
 
     private long mId;

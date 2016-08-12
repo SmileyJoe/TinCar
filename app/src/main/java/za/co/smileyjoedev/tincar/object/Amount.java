@@ -1,14 +1,18 @@
 package za.co.smileyjoedev.tincar.object;
 
+import java.io.Serializable;
+
 import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
 /**
  * Created by cody on 2016/08/11.
  */
-public class Amount {
+public class Amount implements Serializable {
 
     private String mSymbol;
     private double mValue;
+
+    private static final long serialVersionUID = 42L;
 
     public void setSymbol(String symbol) {
         mSymbol = symbol;
