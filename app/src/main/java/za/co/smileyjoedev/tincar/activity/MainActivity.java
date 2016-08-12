@@ -2,6 +2,7 @@ package za.co.smileyjoedev.tincar.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
@@ -16,7 +17,7 @@ import za.co.smileyjoedev.tincar.backend.Api;
 import za.co.smileyjoedev.tincar.backend.ApiCallback;
 import za.co.smileyjoedev.tincar.object.Car;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private SwipeCardAdapter mSwipeCardAdapterCar;
 
@@ -24,18 +25,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         setupViews();
         Api.getCars(this, new GetCarCallback(), true);
     }
 
     private void setupViews(){
+        SwipeCarListener listener = new SwipeCarListener();
         mSwipeCardAdapterCar = new SwipeCardAdapter(getBaseContext(), new ArrayList<Car>());
         SwipeFlingAdapterView swipeView = (SwipeFlingAdapterView) findViewById(R.id.swipe_cars);
         swipeView.setAdapter(mSwipeCardAdapterCar);
-        swipeView.setFlingListener(new CarFlingListener());
+        swipeView.setFlingListener(listener);
+        swipeView.setOnItemClickListener(listener);
     }
 
-    private class CarFlingListener implements SwipeFlingAdapterView.onFlingListener{
+    private class SwipeCarListener implements SwipeFlingAdapterView.onFlingListener, SwipeFlingAdapterView.OnItemClickListener{
 
         private Car mCarRemoved;
 
@@ -64,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onScroll(float v) {
             Log.d("TinCar", "scroll");
+        }
+
+        @Override
+        public void onItemClicked(int position, Object object) {
+            Car car = (Car) object;
+
+            Log.d("TinCar", "Clicked: " + car.getTitle());
         }
     }
 
