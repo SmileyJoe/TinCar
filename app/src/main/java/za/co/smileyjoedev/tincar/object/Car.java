@@ -36,7 +36,7 @@ public class Car implements Serializable{
     private int mYear;
     private int mMileage;
     private String mRegistration;
-    private boolean mMoneyBackGaruntee;
+    private boolean mMoneyBackGuarantee;
     private int mViews;
     private User mUser;
 
@@ -73,7 +73,7 @@ public class Car implements Serializable{
         car.setYear(helper.getInt("year"));
         car.setMileage(helper.getInt("mileage"));
         car.setRegistration(helper.getString("registration"));
-        car.setMoneyBackGaruntee(helper.getBoolean("money_back_guarantee"));
+        car.setMoneyBackGuarantee(helper.getBoolean("money_back_guarantee"));
         car.setViews(helper.getInt("views"));
         car.setUser(User.fromApiResponse(helper));
 
@@ -180,12 +180,12 @@ public class Car implements Serializable{
         mRegistration = registration;
     }
 
-    public boolean isMoneyBackGaruntee() {
-        return mMoneyBackGaruntee;
+    public boolean isMoneyBackGuarantee() {
+        return mMoneyBackGuarantee;
     }
 
-    public void setMoneyBackGaruntee(boolean moneyBackGaruntee) {
-        mMoneyBackGaruntee = moneyBackGaruntee;
+    public void setMoneyBackGuarantee(boolean moneyBackGuarantee) {
+        mMoneyBackGuarantee = moneyBackGuarantee;
     }
 
     public int getViews() {
@@ -275,7 +275,7 @@ public class Car implements Serializable{
                 ", mYear=" + mYear +
                 ", mMileage=" + mMileage +
                 ", mRegistration='" + mRegistration + '\'' +
-                ", mMoneyBackGaruntee=" + mMoneyBackGaruntee +
+                ", mMoneyBackGuarantee=" + mMoneyBackGuarantee +
                 ", mViews=" + mViews +
                 ", mUser=" + mUser +
                 '}';

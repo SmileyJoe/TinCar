@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.koushikdutta.ion.Ion;
 
 import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.object.Car;
+import za.co.smileyjoedev.tincar.object.Extra;
+import za.co.smileyjoedev.tincar.view.CarDetailView;
 
 /**
  * Created by cody on 2016/08/12.
@@ -23,6 +27,7 @@ public class CarViewActivity extends BaseActivity {
     public static final String INTENT_EXTRA_CAR = "car";
 
     private Car mCar;
+    private LinearLayout mLayoutContent;
 
     public static Intent getIntent(Context context, Car car){
         Intent intent = new Intent(context, CarViewActivity.class);
@@ -64,11 +69,47 @@ public class CarViewActivity extends BaseActivity {
     private void populateView(){
         if(mCar != null){
             getSupportActionBar().setTitle(mCar.getTitle());
-            getSupportActionBar().setSubtitle(mCar.getAmount().getFormatted());
 
             ImageView imageCar = (ImageView) findViewById(R.id.image_car);
+            mLayoutContent = (LinearLayout) findViewById(R.id.layout_content_wrapper);
 
             Ion.with(imageCar).load(mCar.getDefaultImageUrl());
+
+            String amount = mCar.getAmount().getFormatted();
+
+            if(mCar.isNegotiable()){
+                amount += " " + getString(R.string.car_detail_extra_is_negotiable);
+            }
+
+            addDetail(R.string.car_detail_title_amount, amount);
+            addDetail(R.string.car_detail_title_description, mCar.getDescription());
+            addDetail(R.string.car_detail_title_engine_size, mCar.getEngineSize());
+            addDetail(R.string.car_detail_title_year, Integer.toString(mCar.getYear()));
+            addDetail(R.string.car_detail_title_mileage, mCar.getEngineSize());
+            addDetail(R.string.car_detail_title_registration, mCar.getRegistration());
+            addDetail(R.string.car_detail_title_money_back_guarantee, Boolean.toString(mCar.isMoneyBackGuarantee()));
+
+            for(Extra.Type type:Extra.Type.values()){
+                Extra extra = mCar.getExtra(type);
+
+                if(extra != null){
+                    addDetail(type.getDisplayTitle(getBaseContext()), extra.getTitle());
+                }
+            }
+
+        }
+    }
+
+    private void addDetail(int titleResId, String content){
+        addDetail(getString(titleResId), content);
+    }
+
+    private void addDetail(String title, String content){
+        if(!TextUtils.isEmpty(content)) {
+            CarDetailView view = new CarDetailView(getBaseContext());
+            view.setContent(content);
+            view.setTitle(title);
+            mLayoutContent.addView(view);
         }
     }
 

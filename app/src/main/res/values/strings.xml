@@ -19,6 +19,15 @@
     <string name="extra_title_door_count">Door Count</string>
     <string name="extra_title_contact_method">Contact Method</string>
 
+    <string name="car_detail_title_amount">Price</string>
+    <string name="car_detail_title_description">Description</string>
+    <string name="car_detail_title_engine_size">Engine Size</string>
+    <string name="car_detail_title_year">Year</string>
+    <string name="car_detail_title_mileage">Mileage</string>
+    <string name="car_detail_title_registration">Registration</string>
+    <string name="car_detail_title_money_back_guarantee">Money Back Guarantee</string>
+    <string name="car_detail_extra_is_negotiable">(Negotiable)</string>
+
     <string name="dialog_message_loading">Loading %1$s</string>
     <string name="text_type_cars">cars</string>
 </resources>
