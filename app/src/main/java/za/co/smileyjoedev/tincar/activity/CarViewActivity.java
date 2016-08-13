@@ -18,6 +18,7 @@ import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.object.Car;
 import za.co.smileyjoedev.tincar.object.Extra;
 import za.co.smileyjoedev.tincar.view.CarDetailView;
+import za.co.smileyjoedev.tincar.view.SocialBarView;
 
 /**
  * Created by cody on 2016/08/12.
@@ -71,7 +72,16 @@ public class CarViewActivity extends BaseActivity {
             getSupportActionBar().setTitle(mCar.getTitle());
 
             ImageView imageCar = (ImageView) findViewById(R.id.image_car);
+            SocialBarView socialCar = (SocialBarView) findViewById(R.id.social_car);
             mLayoutContent = (LinearLayout) findViewById(R.id.layout_content_wrapper);
+
+            String subject = getString(R.string.text_email_subject, mCar.getUrl());
+            String message = getString(R.string.text_email_message, mCar.getUrl());
+
+            socialCar.setPhoneNumber(mCar.getUser().getMobileNumber());
+            socialCar.setWebUrl(mCar.getUrl());
+            socialCar.setShareText(R.string.dialog_share_title, getString(R.string.text_share, mCar.getUrl()));
+            socialCar.setEmail(R.string.dialog_share_title, mCar.getUser().getEmail(), message, subject);
 
             Ion.with(imageCar).load(mCar.getDefaultImageUrl());
 

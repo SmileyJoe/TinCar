@@ -56,6 +56,11 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:orientation="vertical">
+
+            <za.co.smileyjoedev.tincar.view.SocialBarView
+                android:id="@+id/social_car"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
