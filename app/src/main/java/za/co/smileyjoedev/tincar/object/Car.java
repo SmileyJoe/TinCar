@@ -1,5 +1,7 @@
 package za.co.smileyjoedev.tincar.object;
 
+import android.content.Context;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.helper.DateHelper;
 import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
@@ -182,6 +185,14 @@ public class Car implements Serializable{
 
     public boolean isMoneyBackGuarantee() {
         return mMoneyBackGuarantee;
+    }
+
+    public String isMoneyBackGuaranteeFormatted(Context context) {
+        if(mMoneyBackGuarantee){
+            return context.getString(R.string.text_yes);
+        } else {
+            return context.getString(R.string.text_no);
+        }
     }
 
     public void setMoneyBackGuarantee(boolean moneyBackGuarantee) {

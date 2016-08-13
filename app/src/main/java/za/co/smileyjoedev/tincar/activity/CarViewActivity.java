@@ -97,7 +97,7 @@ public class CarViewActivity extends BaseActivity {
             addDetail(R.string.car_detail_title_year, Integer.toString(mCar.getYear()));
             addDetail(R.string.car_detail_title_mileage, mCar.getEngineSize());
             addDetail(R.string.car_detail_title_registration, mCar.getRegistration());
-            addDetail(R.string.car_detail_title_money_back_guarantee, Boolean.toString(mCar.isMoneyBackGuarantee()));
+            addDetail(R.string.car_detail_title_money_back_guarantee, mCar.isMoneyBackGuaranteeFormatted(getBaseContext()));
 
             for(Extra.Type type:Extra.Type.values()){
                 Extra extra = mCar.getExtra(type);
