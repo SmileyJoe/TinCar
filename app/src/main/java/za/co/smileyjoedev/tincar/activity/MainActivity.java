@@ -15,7 +15,9 @@ import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.adapter.SwipeCardAdapter;
 import za.co.smileyjoedev.tincar.backend.Api;
 import za.co.smileyjoedev.tincar.backend.ApiCallback;
+import za.co.smileyjoedev.tincar.helper.Dialog;
 import za.co.smileyjoedev.tincar.object.Car;
+import za.co.smileyjoedev.tincar.object.DbCarObject;
 
 public class MainActivity extends BaseActivity {
 
@@ -27,7 +29,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         setupViews();
-        Api.getCars(this, new GetCarCallback(), true);
+        Api.getCars(this, new GetCarCallback(this), true);
     }
 
     private void setupViews(){
@@ -45,40 +47,49 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void removeFirstObjectInAdapter() {
-            Log.d("TinCar", "remove");
             mCarRemoved = mSwipeCardAdapterCar.getItem(0);
             mSwipeCardAdapterCar.remove(0);
         }
 
         @Override
         public void onLeftCardExit(Object o) {
-            Log.d("TinCar", "left: " + mCarRemoved.getTitle());
+            mCarRemoved.setStatusId(Car.STATUS_DISLIKED);
+            save();
         }
 
         @Override
         public void onRightCardExit(Object o) {
-            Log.d("TinCar", "right: " + mCarRemoved.getTitle());
+            mCarRemoved.setStatusId(Car.STATUS_LIKED);
+            save();
         }
 
         @Override
         public void onAdapterAboutToEmpty(int i) {
-            Log.d("TinCar", "empty");
         }
 
         @Override
         public void onScroll(float v) {
-            Log.d("TinCar", "scroll");
         }
 
         @Override
         public void onItemClicked(int position, Object object) {
             Car car = (Car) object;
             startActivity(CarViewActivity.getIntent(getBaseContext(), car));
-            Log.d("TinCar", "Clicked: " + car.getTitle());
+        }
+
+        private void save(){
+            DbCarObject object = DbCarObject.fromCar(mCarRemoved);
+            object.save();
         }
     }
 
     private class GetCarCallback extends ApiCallback{
+
+        private AppCompatActivity mActivity;
+
+        public GetCarCallback(AppCompatActivity activity) {
+            mActivity = activity;
+        }
 
         @Override
         protected void onSuccess(JsonObject json) {
@@ -95,7 +106,19 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected void onFail(Exception e) {
+            Dialog.error(mActivity, R.string.dialog_message_error_general, new ErrorDialogListener()).show();
+        }
 
+        private class ErrorDialogListener implements Dialog.Listener{
+            @Override
+            public void onPositiveClick() {
+                finish();
+            }
+
+            @Override
+            public void onNegativeClick() {
+
+            }
         }
     }
 }

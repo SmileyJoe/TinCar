@@ -34,6 +34,10 @@
     <string name="text_yes">Yes</string>
     <string name="text_no">No</string>
 
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_button_ok">Ok</string>
+    <string name="dialog_message_error_general">Something went wrong, please try again later.</string>
+
     <string name="dialog_share_title">Choose</string>
     <string name="text_share">Check this car out: %1$s</string>
     <string name="text_email_subject">Check the %1$s</string>

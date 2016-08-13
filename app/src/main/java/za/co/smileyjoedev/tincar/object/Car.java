@@ -20,6 +20,10 @@ import za.co.smileyjoedev.tincar.helper.JsonHelper;
  */
 public class Car implements Serializable{
 
+    public static final int STATUS_NEUTRAL = 0;
+    public static final int STATUS_LIKED = 1;
+    public static final int STATUS_DISLIKED = 2;
+
     private static final long serialVersionUID = 43L;
     private static final String BASE_URL = "https://www.cheki.co.ke/";
 
@@ -42,6 +46,7 @@ public class Car implements Serializable{
     private boolean mMoneyBackGuarantee;
     private int mViews;
     private User mUser;
+    private int mStatusId = STATUS_NEUTRAL;
 
     public static ArrayList<Car> fromApiResponse(JsonArray jsonArray){
         ArrayList<Car> cars = new ArrayList<>();
@@ -279,6 +284,14 @@ public class Car implements Serializable{
         }
 
         return extra;
+    }
+
+    public void setStatusId(int statusId) {
+        mStatusId = statusId;
+    }
+
+    public int getStatusId() {
+        return mStatusId;
     }
 
     @Override
