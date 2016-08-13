@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.helper.DateHelper;
@@ -50,16 +51,32 @@ public class Car implements Serializable{
 
     public static ArrayList<Car> fromApiResponse(JsonArray jsonArray){
         ArrayList<Car> cars = new ArrayList<>();
+        ArrayList<Long> seenCarIds = getSeenIds();
 
         for(int i = 0; i < jsonArray.size(); i++){
             JsonElement element = jsonArray.get(i);
 
             if(element.isJsonObject()) {
-                cars.add(fromApiResponse(element.getAsJsonObject()));
+                Long id = element.getAsJsonObject().get("id").getAsLong();
+
+                if(!seenCarIds.contains(id)){
+                    cars.add(fromApiResponse(element.getAsJsonObject()));
+                }
             }
         }
 
         return cars;
+    }
+
+    private static ArrayList<Long> getSeenIds(){
+        ArrayList<Long> seendIds = new ArrayList<>();
+        List<DbCarObject> objects = DbCarObject.listAll(DbCarObject.class);
+
+        for(DbCarObject object:objects){
+            seendIds.add(object.getCarId());
+        }
+
+        return seendIds;
     }
 
     public static Car fromApiResponse(JsonObject object){

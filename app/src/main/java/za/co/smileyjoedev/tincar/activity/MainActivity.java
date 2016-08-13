@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.adapter.SwipeCardAdapter;
