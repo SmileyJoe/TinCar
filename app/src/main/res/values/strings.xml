@@ -42,4 +42,6 @@
     <string name="text_share">Check this car out: %1$s</string>
     <string name="text_email_subject">Check the %1$s</string>
     <string name="text_email_message">I saw this vehicle for sale at %1$s and would like some more information. Could you please contact me as soon as possible?</string>
+
+    <string name="menu_title_view_processed">Likes/Dislikes</string>
 </resources>

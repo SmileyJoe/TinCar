@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -40,6 +42,23 @@ public class MainActivity extends BaseActivity {
         swipeView.setAdapter(mSwipeCardAdapterCar);
         swipeView.setFlingListener(listener);
         swipeView.setOnItemClickListener(listener);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_view_processed:
+                Log.d("TinCar", "View processed");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private class SwipeCarListener implements SwipeFlingAdapterView.onFlingListener, SwipeFlingAdapterView.OnItemClickListener{
