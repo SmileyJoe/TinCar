@@ -85,13 +85,7 @@ public class CarViewActivity extends BaseActivity {
 
             Ion.with(imageCar).load(mCar.getDefaultImageUrl());
 
-            String amount = mCar.getAmount().getFormatted();
-
-            if(mCar.isNegotiable()){
-                amount += " " + getString(R.string.car_detail_extra_is_negotiable);
-            }
-
-            addDetail(R.string.car_detail_title_amount, amount);
+            addDetail(R.string.car_detail_title_amount, mCar.getAmountNegotiable(getBaseContext()));
             addDetail(R.string.car_detail_title_description, mCar.getDescription());
             addDetail(R.string.car_detail_title_engine_size, mCar.getEngineSize());
             addDetail(R.string.car_detail_title_year, Integer.toString(mCar.getYear()));

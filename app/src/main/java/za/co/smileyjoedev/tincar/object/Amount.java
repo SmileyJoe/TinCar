@@ -1,6 +1,9 @@
 package za.co.smileyjoedev.tincar.object;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 
 import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
@@ -31,7 +34,11 @@ public class Amount implements Serializable {
     }
 
     public String getFormatted(){
-        return mSymbol + mValue;
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getCurrencyInstance();
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+        symbols.setCurrencySymbol(mSymbol);
+        formatter.setDecimalFormatSymbols(symbols);
+        return formatter.format(mValue);
     }
 
     public static Amount fromApiResponse(JsonHelper helper){

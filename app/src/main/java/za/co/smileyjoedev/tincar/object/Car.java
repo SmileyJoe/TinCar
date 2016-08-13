@@ -219,6 +219,20 @@ public class Car implements Serializable{
         return mAmount;
     }
 
+    public String getAmountNegotiable(Context context){
+        if(mAmount != null){
+            String amount = getAmount().getFormatted();
+
+            if(isNegotiable()){
+                amount += " " + context.getString(R.string.car_detail_extra_is_negotiable);
+            }
+
+            return amount;
+        } else {
+            return "";
+        }
+    }
+
     public void setAmount(Amount amount) {
         mAmount = amount;
     }
