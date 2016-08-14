@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.koushikdutta.ion.Ion;
 
 import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.object.Car;
+import za.co.smileyjoedev.tincar.object.DbCarObject;
 import za.co.smileyjoedev.tincar.object.Extra;
 import za.co.smileyjoedev.tincar.view.CarDetailView;
 import za.co.smileyjoedev.tincar.view.SocialBarView;
@@ -118,13 +120,67 @@ public class CarViewActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.car_view, menu);
+
+        MenuItem itemLike = menu.findItem(R.id.action_like);
+        MenuItem itemUnlike = menu.findItem(R.id.action_unlike);
+        MenuItem itemDislike = menu.findItem(R.id.action_dislike);
+        MenuItem itemUndislike = menu.findItem(R.id.action_undislike);
+
+        switch (mCar.getStatusId()){
+            case Car.STATUS_LIKED:
+                itemLike.setVisible(false);
+                itemUnlike.setVisible(true);
+                itemDislike.setVisible(true);
+                itemUndislike.setVisible(false);
+                break;
+            case Car.STATUS_DISLIKED:
+                itemLike.setVisible(true);
+                itemUnlike.setVisible(false);
+                itemDislike.setVisible(false);
+                itemUndislike.setVisible(true);
+                break;
+            case Car.STATUS_NEUTRAL:
+            default:
+                itemLike.setVisible(true);
+                itemUnlike.setVisible(false);
+                itemDislike.setVisible(true);
+                itemUndislike.setVisible(false);
+                break;
+        }
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int newStatus = -1;
         switch (item.getItemId()){
+            case R.id.action_like:
+                newStatus = Car.STATUS_LIKED;
+                break;
+            case R.id.action_unlike:
+                newStatus = Car.STATUS_NEUTRAL;
+                break;
+            case R.id.action_dislike:
+                newStatus = Car.STATUS_DISLIKED;
+                break;
+            case R.id.action_undislike:
+                newStatus = Car.STATUS_NEUTRAL;
+                break;
             case android.R.id.home:
                 finish();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        }
+
+        if(newStatus >= 0){
+            mCar.setStatusId(newStatus);
+            DbCarObject.fromCar(mCar).save();
+            invalidateOptionsMenu();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 }

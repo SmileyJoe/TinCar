@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_like"
+        android:icon="@drawable/ic_thumb_up_black_24dp"
+        android:title="@string/menu_title_like"
+        app:showAsAction="always"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_unlike"
+        android:icon="@drawable/ic_thumb_up_white_24dp"
+        android:title="@string/menu_title_unlike"
+        app:showAsAction="always"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_dislike"
+        android:icon="@drawable/ic_thumb_down_black_24dp"
+        android:title="@string/menu_title_dislike"
+        app:showAsAction="always"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_undislike"
+        android:icon="@drawable/ic_thumb_down_white_24dp"
+        android:title="@string/menu_title_undislike"
+        app:showAsAction="always"
+        android:visible="false"/>
+</menu>

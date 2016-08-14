@@ -5,6 +5,7 @@
     android:id="@+id/toolbar"
     android:minHeight="?attr/actionBarSize"
     app:theme="@style/ToolBar"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 </android.support.v7.widget.Toolbar>
