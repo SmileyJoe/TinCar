@@ -49,4 +49,5 @@
 
     <string name="tab_title_likes">Likes</string>
     <string name="tab_title_dislikes">Dislikes</string>
+    <string name="text_empty_car_list">There are no cars in this list.</string>
 </resources>

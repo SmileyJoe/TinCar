@@ -1,10 +1,12 @@
 package za.co.smileyjoedev.tincar.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -46,4 +48,16 @@ public class CarListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_car_list, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if(mCars == null || mCars.size() == 0){
+            TextView textEmpty = (TextView) view.findViewById(R.id.text_empty);
+            textEmpty.setVisibility(View.VISIBLE);
+            textEmpty.setText(R.string.text_empty_car_list);
+        } else {
+
+        }
+    }
 }
