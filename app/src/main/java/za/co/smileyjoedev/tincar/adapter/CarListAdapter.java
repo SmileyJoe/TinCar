@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import za.co.smileyjoedev.tincar.R;
@@ -24,6 +25,11 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
 
     public CarListAdapter(ArrayList<Car> items) {
         mItems = items;
+    }
+
+    public void update(ArrayList<Car> cars){
+        mItems = cars;
+        notifyDataSetChanged();
     }
 
     @Override

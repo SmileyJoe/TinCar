@@ -17,6 +17,8 @@ import za.co.smileyjoedev.tincar.adapter.MyHistoryPagerAdapter;
  */
 public class MyHistoryActivity extends BaseActivity {
 
+    private MyHistoryPagerAdapter mPagerHistoryAdapter;
+
     public static Intent getIntent(Context context){
         Intent intent = new Intent(context, MyHistoryActivity.class);
         return intent;
@@ -35,9 +37,15 @@ public class MyHistoryActivity extends BaseActivity {
     private void populateView(){
         TabLayout tabHistory = (TabLayout) findViewById(R.id.tab_layout_history);
         ViewPager pagerHistory = (ViewPager) findViewById(R.id.viewpager_history);
-        MyHistoryPagerAdapter adapter = new MyHistoryPagerAdapter(getBaseContext(), getSupportFragmentManager());
-        pagerHistory.setAdapter(adapter);
+        mPagerHistoryAdapter = new MyHistoryPagerAdapter(getBaseContext(), getSupportFragmentManager());
+        pagerHistory.setAdapter(mPagerHistoryAdapter);
         tabHistory.setupWithViewPager(pagerHistory);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPagerHistoryAdapter.refresh();
     }
 
     @Override

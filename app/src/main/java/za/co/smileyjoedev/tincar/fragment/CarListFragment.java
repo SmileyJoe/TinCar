@@ -3,7 +3,6 @@ package za.co.smileyjoedev.tincar.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,15 +22,27 @@ import za.co.smileyjoedev.tincar.object.Car;
 public class CarListFragment extends Fragment {
 
     private static final String ARGUMENT_CARS = "cars";
+    private static final String ARGUMENT_POSITION = "position";
 
-    private ArrayList<Car> mCars = new ArrayList<>();
+    private int mPosition = 0;
 
-    public static CarListFragment newInstance(ArrayList<Car> cars) {
+    private CarListAdapter mCarListAdapter;
+
+    public static CarListFragment newInstance(ArrayList<Car> cars, int position) {
         CarListFragment fragment = new CarListFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARGUMENT_CARS, cars);
+        args.putInt(ARGUMENT_POSITION, position);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public int getPosition() {
+        return mPosition;
+    }
+
+    public void update(ArrayList<Car> cars){
+        mCarListAdapter.update(cars);
     }
 
     @Override
@@ -41,7 +52,11 @@ public class CarListFragment extends Fragment {
 
         if(arguments != null){
             if(arguments.containsKey(ARGUMENT_CARS)){
-                mCars = (ArrayList<Car>) arguments.getSerializable(ARGUMENT_CARS);
+                mCarListAdapter = new CarListAdapter((ArrayList<Car>) arguments.getSerializable(ARGUMENT_CARS));
+            }
+
+            if(arguments.containsKey(ARGUMENT_POSITION)){
+                mPosition = arguments.getInt(ARGUMENT_POSITION);
             }
         }
     }
@@ -56,7 +71,7 @@ public class CarListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(mCars == null || mCars.size() == 0){
+        if(mCarListAdapter == null || mCarListAdapter.getItemCount() == 0){
             TextView textEmpty = (TextView) view.findViewById(R.id.text_empty);
             textEmpty.setVisibility(View.VISIBLE);
             textEmpty.setText(R.string.text_empty_car_list);
@@ -64,7 +79,7 @@ public class CarListFragment extends Fragment {
             RecyclerView recyclerCars = (RecyclerView) view.findViewById(R.id.recycler_cars);
             recyclerCars.setVisibility(View.VISIBLE);
             recyclerCars.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerCars.setAdapter(new CarListAdapter(mCars));
+            recyclerCars.setAdapter(mCarListAdapter);
         }
     }
 }
