@@ -27,10 +27,13 @@ import za.co.smileyjoedev.tincar.view.SocialBarView;
  */
 public class CarViewActivity extends BaseActivity {
 
+    public static final int INTENT_REQUEST_ID = 1;
+
     public static final String INTENT_EXTRA_CAR = "car";
 
     private Car mCar;
     private LinearLayout mLayoutContent;
+    private int mIntialStatus = -1;
 
     public static Intent getIntent(Context context, Car car){
         Intent intent = new Intent(context, CarViewActivity.class);
@@ -59,13 +62,14 @@ public class CarViewActivity extends BaseActivity {
             if (extras != null) {
                 if (extras.containsKey(INTENT_EXTRA_CAR)) {
                     mCar = (Car) extras.getSerializable(INTENT_EXTRA_CAR);
-                    Log.d("TinCar", "Car: " + mCar.getTitle());
                 }
             }
         }
 
         if(mCar == null){
             // TODO show error dialog and close activity on click
+        } else {
+            mIntialStatus = mCar.getStatusId();
         }
     }
 
@@ -182,5 +186,18 @@ public class CarViewActivity extends BaseActivity {
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void finish() {
+        int currentStatus = mCar.getStatusId();
+
+        if(mIntialStatus != currentStatus){
+            setResult(RESULT_OK);
+        } else {
+            setResult(RESULT_CANCELED);
+        }
+
+        super.finish();
     }
 }

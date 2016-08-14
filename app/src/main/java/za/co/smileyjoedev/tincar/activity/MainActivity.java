@@ -1,5 +1,6 @@
 package za.co.smileyjoedev.tincar.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +26,7 @@ import za.co.smileyjoedev.tincar.object.DbCarObject;
 public class MainActivity extends BaseActivity {
 
     private SwipeCardAdapter mSwipeCardAdapterCar;
+    private SwipeFlingAdapterView mSwipeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,10 @@ public class MainActivity extends BaseActivity {
     private void setupViews(){
         SwipeCarListener listener = new SwipeCarListener();
         mSwipeCardAdapterCar = new SwipeCardAdapter(getBaseContext(), new ArrayList<Car>());
-        SwipeFlingAdapterView swipeView = (SwipeFlingAdapterView) findViewById(R.id.swipe_cars);
-        swipeView.setAdapter(mSwipeCardAdapterCar);
-        swipeView.setFlingListener(listener);
-        swipeView.setOnItemClickListener(listener);
+        mSwipeView = (SwipeFlingAdapterView) findViewById(R.id.swipe_cars);
+        mSwipeView.setAdapter(mSwipeCardAdapterCar);
+        mSwipeView.setFlingListener(listener);
+        mSwipeView.setOnItemClickListener(listener);
     }
 
     @Override
@@ -58,6 +60,20 @@ public class MainActivity extends BaseActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case CarViewActivity.INTENT_REQUEST_ID:
+                if(resultCode == RESULT_OK){
+                    // TODO: Remove the top card from the adapter //
+                }
+                return;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                return;
         }
     }
 
@@ -94,7 +110,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onItemClicked(int position, Object object) {
             Car car = (Car) object;
-            startActivity(CarViewActivity.getIntent(getBaseContext(), car));
+            startActivityForResult(CarViewActivity.getIntent(getBaseContext(), car), CarViewActivity.INTENT_REQUEST_ID);
         }
 
         private void save(){
