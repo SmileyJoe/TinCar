@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_view_processed:
+            case R.id.action_view_my_history:
                 Log.d("TinCar", "View processed");
                 return true;
             default:
