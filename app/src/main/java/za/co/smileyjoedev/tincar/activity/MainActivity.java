@@ -118,7 +118,7 @@ public class MainActivity extends BaseActivity {
                 JsonElement element = json.get("data");
 
                 if(element.isJsonArray()){
-                    ArrayList<Car> cars = Car.fromApiResponse(element.getAsJsonArray());
+                    ArrayList<Car> cars = Car.fromApiResponse(element.getAsJsonArray(), true);
                     mSwipeCardAdapterCar.update(cars);
                 }
             }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.fragment.CarListFragment;
+import za.co.smileyjoedev.tincar.helper.DbHelper;
 import za.co.smileyjoedev.tincar.object.Car;
 
 /**
@@ -27,9 +28,9 @@ public class MyHistoryPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return CarListFragment.newInstance(new ArrayList<Car>());
+                return CarListFragment.newInstance(DbHelper.getLikedCars());
             case 1:
-                return CarListFragment.newInstance(new ArrayList<Car>());
+                return CarListFragment.newInstance(DbHelper.getDislikedCars());
             default:
                 return null;
         }

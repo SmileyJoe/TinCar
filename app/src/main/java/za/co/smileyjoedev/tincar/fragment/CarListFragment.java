@@ -3,6 +3,9 @@ package za.co.smileyjoedev.tincar.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import za.co.smileyjoedev.tincar.R;
+import za.co.smileyjoedev.tincar.adapter.CarListAdapter;
 import za.co.smileyjoedev.tincar.object.Car;
 
 /**
@@ -57,7 +61,10 @@ public class CarListFragment extends Fragment {
             textEmpty.setVisibility(View.VISIBLE);
             textEmpty.setText(R.string.text_empty_car_list);
         } else {
-
+            RecyclerView recyclerCars = (RecyclerView) view.findViewById(R.id.recycler_cars);
+            recyclerCars.setVisibility(View.VISIBLE);
+            recyclerCars.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerCars.setAdapter(new CarListAdapter(mCars));
         }
     }
 }

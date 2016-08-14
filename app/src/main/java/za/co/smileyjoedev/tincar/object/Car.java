@@ -2,6 +2,7 @@ package za.co.smileyjoedev.tincar.object;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import za.co.smileyjoedev.tincar.R;
 import za.co.smileyjoedev.tincar.helper.DateHelper;
+import za.co.smileyjoedev.tincar.helper.DbHelper;
 import za.co.smileyjoedev.tincar.helper.JsonHelper;
 
 /**
@@ -49,9 +51,13 @@ public class Car implements Serializable{
     private User mUser;
     private int mStatusId = STATUS_NEUTRAL;
 
-    public static ArrayList<Car> fromApiResponse(JsonArray jsonArray){
+    public static ArrayList<Car> fromApiResponse(JsonArray jsonArray, boolean excludeHistory){
         ArrayList<Car> cars = new ArrayList<>();
-        ArrayList<Long> seenCarIds = getSeenIds();
+        ArrayList<Long> historyCarIds = new ArrayList<>();
+
+        if(excludeHistory) {
+            historyCarIds = DbHelper.getHistoryIds();
+        }
 
         for(int i = 0; i < jsonArray.size(); i++){
             JsonElement element = jsonArray.get(i);
@@ -59,24 +65,13 @@ public class Car implements Serializable{
             if(element.isJsonObject()) {
                 Long id = element.getAsJsonObject().get("id").getAsLong();
 
-                if(!seenCarIds.contains(id)){
+                if(!historyCarIds.contains(id)){
                     cars.add(fromApiResponse(element.getAsJsonObject()));
                 }
             }
         }
 
         return cars;
-    }
-
-    private static ArrayList<Long> getSeenIds(){
-        ArrayList<Long> seendIds = new ArrayList<>();
-        List<DbCarObject> objects = DbCarObject.listAll(DbCarObject.class);
-
-        for(DbCarObject object:objects){
-            seendIds.add(object.getCarId());
-        }
-
-        return seendIds;
     }
 
     public static Car fromApiResponse(JsonObject object){
@@ -106,6 +101,22 @@ public class Car implements Serializable{
             car.addExtra(type, Extra.fromApiResponse(helper.getObject(type.getApiKey())));
         }
 
+        return car;
+    }
+
+    public static ArrayList<Car> fromDbCarObject(List<DbCarObject> objects){
+        ArrayList<Car> cars = new ArrayList<>();
+
+        for(DbCarObject object:objects){
+            cars.add(fromDbCarObject(object));
+        }
+
+        return cars;
+    }
+
+    public static Car fromDbCarObject(DbCarObject object){
+        Gson gson = new Gson();
+        Car car = gson.fromJson(object.getCarJson(), Car.class);
         return car;
     }
 

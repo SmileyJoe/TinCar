@@ -88,8 +88,6 @@ public class SwipeCardAdapter extends BaseAdapter {
             mTextAmount.setText(car.getAmount().getFormatted());
 
             Ion.with(mImageCar)
-                    .placeholder(android.R.drawable.btn_star_big_off)
-                    .error(android.R.drawable.btn_star_big_on)
                     .load(car.getDefaultImageUrl());
         }
     }

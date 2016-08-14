@@ -18,4 +18,5 @@
     <dimen name="toolbar_car_view_height">250dp</dimen>
 
     <dimen name="tab_indicator_height">5dp</dimen>
+    <dimen name="car_list_image_width">100dp</dimen>
 </resources>
