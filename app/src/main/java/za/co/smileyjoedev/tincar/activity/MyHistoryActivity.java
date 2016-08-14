@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import za.co.smileyjoedev.tincar.R;
+import za.co.smileyjoedev.tincar.adapter.MyHistoryPagerAdapter;
 
 /**
  * Created by cody on 2016/08/14.
@@ -26,6 +29,15 @@ public class MyHistoryActivity extends BaseActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        populateView();
+    }
+
+    private void populateView(){
+        TabLayout tabHistory = (TabLayout) findViewById(R.id.tab_layout_history);
+        ViewPager pagerHistory = (ViewPager) findViewById(R.id.viewpager_history);
+        MyHistoryPagerAdapter adapter = new MyHistoryPagerAdapter(getBaseContext(), getSupportFragmentManager());
+        pagerHistory.setAdapter(adapter);
+        tabHistory.setupWithViewPager(pagerHistory);
     }
 
     @Override
