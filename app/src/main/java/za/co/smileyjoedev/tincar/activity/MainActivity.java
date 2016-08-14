@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_view_my_history:
-                Log.d("TinCar", "View processed");
+                startActivity(MyHistoryActivity.getIntent(getBaseContext()));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

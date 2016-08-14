@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Tincar</string>
 
+    <string name="activity_title_my_history">My History</string>
+
     <string name="extra_title_make">Make</string>
     <string name="extra_title_model">Model</string>
     <string name="extra_title_location">Location</string>
@@ -44,4 +46,7 @@
     <string name="text_email_message">I saw this vehicle for sale at %1$s and would like some more information. Could you please contact me as soon as possible?</string>
 
     <string name="menu_title_view_my_history">My History</string>
+
+    <string name="tab_title_likes">Likes</string>
+    <string name="tab_title_dislikes">Dislikes</string>
 </resources>

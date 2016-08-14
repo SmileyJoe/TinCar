@@ -30,6 +30,11 @@
             android:name=".activity.CarViewActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".activity.MyHistoryActivity"
+            android:label="@string/activity_title_my_history"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
